@@ -1,0 +1,140 @@
+# Spring Boot Application Development Rules
+
+
+## Code Quality
+* Follow SOLID principles in all class implementations
+* Write methods that do one thing only and do it well
+* Keep methods under 30 lines of code when possible
+* Use consistent indentation (4 spaces) throughout the codebase
+* Limit line length to 120 characters maximum
+* Follow standard Java naming conventions
+* Use lombok annotations to reduce boilerplate code
+* Avoid magic numbers and strings - use constants
+* Always include proper exception handling with specific exception types
+* Never disable or suppress warnings without comments explaining why
+* Keep cyclomatic complexity under 10 for all methods
+* Use interfaces for service layer components
+* Prefer composition over inheritance
+* Avoid static methods and variables except for utilities
+* Keep classes focused on a single responsibility
+
+## Documentation
+* Add JavaDoc for all public methods and classes
+* Document all method parameters and return values
+* Comment complex algorithms and business logic
+* Explain "why" in comments, not "what" (code should be self-explanatory)
+* Keep documentation up-to-date when changing code
+* Document all application configuration options
+* Add inline documentation for complex regular expressions
+* Document all REST endpoints with OpenAPI/Swagger annotations
+* Add meaningful commit messages following conventional commits standard
+** everythime u create, modifie or delete and endpoint, or anything that will impact the front, update the backend.md file
+
+## Data & Security
+* Always validate user input at controller level
+* Use DTOs to transfer data between layers
+* Never expose entity objects directly from controllers
+* Store sensitive information only in encrypted form
+* Never log sensitive data (passwords, tokens, PII)
+* Use parameterized queries to prevent SQL injection
+* Implement proper authorization checks at service layer
+* Use HTTPS for all external communications
+* Never put sensitive information in URLs
+* Use environment variables for configuration values
+
+
+
+## Database
+* Use Flyway for database migrations
+* Keep migrations versioned and immutable
+* Include rollback scripts for all migrations
+* Use appropriate indexes for frequent queries
+* Follow database naming conventions consistently
+* Use foreign key constraints for referential integrity
+* Include database comments for complex tables and columns
+* Optimize queries for performance
+* Use batch operations for bulk data changes
+* Implement soft delete pattern for important entities
+
+## Keycloak Integration
+* Use proper RBAC (Role-Based Access Control) with Keycloak
+* Configure appropriate token expiration times
+* Validate tokens on server side
+* Use refresh tokens appropriately
+* Configure proper CORS settings
+* Use proper scopes for API access
+* Never store access tokens in local storage
+* Include required user attributes in tokens
+* Handle token revocation properly
+* Test authentication and authorization flows thoroughly
+
+## Docker Configuration
+* Use specific version tags for all images
+* Never use root user inside containers
+* Include health checks for all services
+* Set appropriate resource limits
+* Use multi-stage builds for smaller images
+* Keep secrets out of Docker images
+* Use overlay networks for container communication
+* Configure proper logging
+* Include graceful shutdown configurations
+* Keep base images updated for security
+
+## Development Workflow
+* Create feature branches for all new development
+* Request code reviews for all pull requests
+* Run tests locally before pushing code
+* Update documentation when implementing new features
+* Fix failing tests before moving to new development
+* Regularly update dependencies for security
+* Use Conventional Commits format for commit messages
+* Perform static code analysis before merging
+* Never push directly to main/master branch
+* Create meaningful pull request descriptions
+
+## Performance
+* Use pagination for collection endpoints
+* Implement caching for frequent and expensive operations
+* Optimize database queries with proper indexing
+* Use asynchronous processing for non-critical operations
+* Profile application for memory usage
+* Monitor and optimize garbage collection
+* Use connection pooling for external services
+* Implement rate limiting for public APIs
+* Optimize JVM settings for the deployment environment
+* Use bulk operations for batch processing
+
+## Error Handling
+* Implement global exception handling
+* Return appropriate HTTP status codes
+* Include meaningful error messages
+* Log exceptions with contextual information
+* Don't expose internal error details to clients
+* Implement circuit breakers for external service calls
+* Handle transient failures with retries
+* Use fallbacks for non-critical features
+* Monitor and alert on application errors
+* Implement appropriate timeout handling
+
+## Deployment & Operations
+* Implement health check endpoints
+* Include proper application metrics
+* Configure appropriate logging levels
+* Create runbooks for common operational tasks
+* Document deployment procedures
+* Implement blue-green deployment strategy
+* Configure automated backups
+* Include monitoring and alerting
+* Create disaster recovery procedures
+* Document all external dependencies
+
+## AI Assistant Usage
+* Be specific when requesting code generation
+* Always review AI-generated code before using
+* Ask AI to explain complex implementations
+* Provide context when asking for help
+* Use AI for code reviews and suggestions
+* Ask for clarification first if requirements are unclear
+* Never accept generated code without understanding it
+* Use AI to help document existing code
+* Ask AI to generate unit tests

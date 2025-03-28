@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: agentstore
+  datasource:
+    url: jdbc:postgresql://localhost:5432/agentstore
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    enabled: true
+    clean-disabled: false
+    clean-on-validation-error: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
+          jwk-set-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
+          audiences: ${keycloak.resource}
+          issuer-audiences:
+            - ${keycloak.auth-server-url}/realms/${keycloak.realm}
+            - http://localhost:8081/realms/${keycloak.realm}
+
+# Keycloak Configuration
+keycloak:
+  auth-server-url: http://localhost:8081
+  realm: agentstore
+  resource: agentstore-app
+  public-client: false
+  bearer-only: true
+  principal-attribute: preferred_username
+
+# Swagger/OpenAPI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+    disable-swagger-default-url: true
+  packages-to-scan: com.agentstore.userservice.controller
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.agentstore.userservice: DEBUG  # Keep application logs at DEBUG for now
+    org.springframework.security: DEBUG  # Increase Spring Security logs
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: INFO # Keep this less verbose unless needed
+    org.hibernate: INFO # Keep Hibernate logs less verbose unless needed 
